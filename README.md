@@ -1,30 +1,30 @@
-# React + TypeScript + Vite
+# Money Eddy
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Money Eddy es una aplicación híbrida (web y móvil) diseñada para la gestión de préstamos. La aplicación permite el registro de usuarios y préstamos, cálculo de intereses, historial de préstamos, notificaciones y un dashboard con métricas clave.
 
-Currently, two official plugins are available:
+## Características
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Registro de Usuarios**: Formulario para ingresar la información personal de los prestatarios (nombre, dirección, teléfono, etc.).
+- **Registro de Préstamos**: Formulario para ingresar detalles del préstamo (monto, tasa de interés, plazo, etc.).
+- **Cálculo de Intereses**: Funcionalidad para calcular el capital y los intereses basados en la tasa acordada.
+- **Historial de Préstamos**: Tabla o lista que muestra todos los préstamos activos y completados.
+- **Notificaciones**: Recordatorios para pagos próximos o vencidos.
+- **Acceso Seguro**: Mecanismo de autenticación y autorización para proteger la información.
+- **Dashboard**: Visualización de métricas clave, como el total de préstamos activos vs. completados, montos prestados mensualmente, ingresos por intereses generados, distribución de préstamos por tasa de interés y próximos pagos pendientes.
 
-## Expanding the ESLint configuration
+## Tecnologías Utilizadas
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Frontend**: React, Vite, SCSS
+- **Backend**: Node.js, Express
+- **Base de Datos**: MySQL en AWS RDS
+<!-- - **Autenticación**: Amazon Cognito -->
+- **Infraestructura**: AWS (Lambda, S3, EC2)
+- **Estado Global**: Zustand
+- **Data Fetching**: @tanstack/react-query
 
-- Configure the top-level `parserOptions` property like this:
+## Instalación
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/Allan-Sanchez/money_eddy.git
+   cd money_eddy
