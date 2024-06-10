@@ -1,0 +1,33 @@
+// src/components/LoadingSpinner.module.scss
+@import 'variables.scss';
+
+.spinnerContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.8); // Ajuste el color de fondo para un efecto de superposición
+    z-index: 9999; // Asegúrate de que esté por encima de todos los demás elementos
+  }
+  
+  .spinner {
+    border: 4px solid $primary-color;
+    border-top: 4px solid $secondary-color;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
