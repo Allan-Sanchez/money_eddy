@@ -2,11 +2,17 @@ import React from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
 import Card from '../components/Card';
-import HomeIcon from '../assets/icons/HomeIcon';
-import ProfileIcon from '../assets/icons/ProfileIcon';
-import SettingsIcon from '../assets/icons/SettingsIcon';
-import LogoutIcon from '../assets/icons/LogoutIcon';
+// import HomeIcon from '../assets/icons/HomeIcon';
+// import ProfileIcon from '../assets/icons/ProfileIcon';
+// import SettingsIcon from '../assets/icons/SettingsIcon';
+// import LogoutIcon from '../assets/icons/LogoutIcon';
 import styles from '../scss/Dashboard.module.scss';
+
+import Borrow from "../assets/Home/borrow _user.png"
+import Money from "../assets/Home/money-bag.png"
+import Wallet from "../assets/Home/wallet.png"
+import Tasks from "../assets/Home/tasks.png"
+
 
 Chart.register(...registerables);
 
@@ -25,13 +31,15 @@ const Dashboard: React.FC = () => {
     ],
   };
 
+  
+
   return (
     <div className={styles.dashboardContent}>
       <div className={styles.cardContainer}>
-        <Card title="Total Deudores" value={350} icon={<HomeIcon />} />
-        <Card title="Total Préstamos" value="$150,000" icon={<ProfileIcon />} />
-        <Card title="Intereses Ganados" value="$50,000" icon={<SettingsIcon />} />
-        <Card title="Deudores Activos" value={120} icon={<LogoutIcon />} />
+        <Card title="Total Deudores" value={350} icon={<img src={Borrow} alt="Borrow image" />} />
+        <Card title="Total Préstamos" value="$150,000" icon={<img src={Money} alt="Borrow image" />} />
+        <Card title="Intereses Ganados" value="$50,000" icon={<img src={Wallet} alt="Borrow image" />} />
+        <Card title="Deudores Activos" value={120} icon={<img src={Tasks} alt="Borrow image" />} />
       </div>
       <div className={styles.chartContainer}>
         <div>

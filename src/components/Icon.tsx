@@ -6,6 +6,9 @@ import LogoutIcon from '../assets/icons/LogoutIcon';
 import NotificationIcon from '../assets/icons/NotificationIcon';
 import CollapseIcon from '../assets/icons/CollapseIcon';
 import HamburgerIcon from '../assets/icons/HamburgerIcon';
+import MoneyIcon from '../assets/icons/MoneyIcon';
+import BorrowerIcon from '../assets/icons/BorrowerIcon';
+import LoanIcon from '../assets/icons/LoanIcon';
 interface IconProps {
   name: string;
   className?: string;
@@ -19,6 +22,9 @@ const iconMap: { [key: string]: React.FunctionComponent<React.SVGProps<SVGSVGEle
   notification: NotificationIcon,
   collapse: CollapseIcon,
   hamburger: HamburgerIcon,
+  money: MoneyIcon,
+  borrower: BorrowerIcon,
+  loan: LoanIcon,
 };
 
 const Icon: React.FC<IconProps> = ({ name, className }) => {
