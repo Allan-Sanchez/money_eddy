@@ -23,7 +23,7 @@ interface AuthResponse {
 }
 
 const fetchUser = async (): Promise<User> => {
-  const { data } = await axios.get(`${backendUrl}/api/users/me`, { withCredentials: true });
+  const { data } = await axios.get(`${backendUrl}/api/users`, { withCredentials: true });
   return data;
 };
 
