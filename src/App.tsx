@@ -8,6 +8,7 @@ import LoginPage from './pages/LoginPage';
 import Dashboard from './pages/Dashboard';
 import PrivateRoute from './routers/PrivateRoute';
 import queryClient from './query/queryClient';
+import Layout from './components/Layout';
 
 const App: React.FC = () => {
   return (
@@ -20,7 +21,9 @@ const App: React.FC = () => {
             path="/dashboard"
             element={
               <PrivateRoute>
-                <Dashboard />
+                <Layout>
+                  <Dashboard />
+                </Layout>
               </PrivateRoute>
             }
           />

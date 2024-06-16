@@ -3,17 +3,21 @@ lockfileVersion: 5.4
 specifiers:
   '@tanstack/react-query': ^5.40.1
   '@tanstack/react-query-devtools': ^5.40.1
+  '@types/node': ^20.14.2
   '@types/react': ^18.2.66
   '@types/react-dom': ^18.2.22
   '@typescript-eslint/eslint-plugin': ^7.2.0
   '@typescript-eslint/parser': ^7.2.0
   '@vitejs/plugin-react-swc': ^3.5.0
   axios: ^1.7.2
+  chart.js: ^4.4.3
   eslint: ^8.57.0
   eslint-plugin-react-hooks: ^4.6.0
   eslint-plugin-react-refresh: ^0.4.6
   react: ^18.2.0
+  react-chartjs-2: ^5.2.0
   react-dom: ^18.2.0
+  react-hot-toast: ^2.4.1
   react-router-dom: ^6.23.1
   sass: ^1.77.4
   typescript: ^5.2.2
@@ -25,13 +29,17 @@ dependencies:
   '@tanstack/react-query': 5.40.1_react@18.3.1
   '@tanstack/react-query-devtools': 5.40.1_jxx74xbtkowdo2hmasdmsbu4yq
   axios: 1.7.2
+  chart.js: 4.4.3
   react: 18.3.1
+  react-chartjs-2: 5.2.0_6nldjhme6l7nu463cfz5hxf52m
   react-dom: 18.3.1_react@18.3.1
+  react-hot-toast: 2.4.1_nnrd3gsncyragczmpvfhocinkq
   react-router-dom: 6.23.1_nnrd3gsncyragczmpvfhocinkq
   sass: 1.77.4
   zustand: 4.5.2_3vdbhqr2ncalcx7opnshezpx3q
 
 devDependencies:
+  '@types/node': 20.14.2
   '@types/react': 18.3.3
   '@types/react-dom': 18.3.0
   '@typescript-eslint/eslint-plugin': 7.12.0_zetigct7vzwypy2zr4tya5bmxa
@@ -41,7 +49,7 @@ devDependencies:
   eslint-plugin-react-hooks: 4.6.2_eslint@8.57.0
   eslint-plugin-react-refresh: 0.4.7_eslint@8.57.0
   typescript: 5.4.5
-  vite: 5.2.13_sass@1.77.4
+  vite: 5.2.13_x56oaxsgxf3xwi7jr3m36vlmkm
   vite-plugin-pwa: 0.20.0_vite@5.2.13
 
 packages:
@@ -1603,6 +1611,10 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
+  /@kurkle/color/0.3.2:
+    resolution: {integrity: sha512-fuscdXJ9G1qb7W8VdHi+IwRqij3lBkosAm4ydQtEmbY58OzHXqQhvlxqEkoz0yssNVn38bcpRWgA9PP+OGoisw==}
+    dev: false
+
   /@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
     engines: {node: '>= 8'}
@@ -2016,6 +2028,12 @@ packages:
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
     dev: true
 
+  /@types/node/20.14.2:
+    resolution: {integrity: sha512-xyu6WAMVwv6AKFLB+e/7ySZVr/0zLCzOa7rSpq6jNwpqOrUbcACDWC+53d4n2QHOnDou0fbIsg8wZu/sxrnI4Q==}
+    dependencies:
+      undici-types: 5.26.5
+    dev: true
+
   /@types/prop-types/15.7.12:
     resolution: {integrity: sha512-5zvhXYtRNRluoE/jAp4GVsSduVUzNWKkOZrCDBWYtE7biZywwdC2AcEzg+cSMLFRfVgeAFqpfNabiPjxFddV1Q==}
 
@@ -2176,7 +2194,7 @@ packages:
       vite: ^4 || ^5
     dependencies:
       '@swc/core': 1.5.25
-      vite: 5.2.13_sass@1.77.4
+      vite: 5.2.13_x56oaxsgxf3xwi7jr3m36vlmkm
     transitivePeerDependencies:
       - '@swc/helpers'
     dev: true
@@ -2419,6 +2437,13 @@ packages:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
     dev: true
+
+  /chart.js/4.4.3:
+    resolution: {integrity: sha512-qK1gkGSRYcJzqrrzdR6a+I0vQ4/R+SoODXyAjscQ/4mzuNzySaMCd+hyVxitSY1+L2fjPD1Gbn+ibNqRmwQeLw==}
+    engines: {pnpm: '>=8'}
+    dependencies:
+      '@kurkle/color': 0.3.2
+    dev: false
 
   /chokidar/3.6.0:
     resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
@@ -3071,6 +3096,12 @@ packages:
       slash: 3.0.0
     dev: true
 
+  /goober/2.1.14:
+    resolution: {integrity: sha512-4UpC0NdGyAFqLNPnhCT2iHpza2q+RAY3GV85a/mRPdzyPQMsj0KmMMuetdIkzWRbJ+Hgau1EZztq8ImmiMGhsg==}
+    peerDependencies:
+      csstype: ^3.0.10
+    dev: false
+
   /gopd/1.0.1:
     resolution: {integrity: sha512-d65bNlIadxvpb/A2abVdlqKqV563juRnZ1Wtk6s1sIR8uNsXR70xqIzVqxVf1eTqDunwT2MkczEeaezCKTZhwA==}
     dependencies:
@@ -3672,6 +3703,16 @@ packages:
       safe-buffer: 5.2.1
     dev: true
 
+  /react-chartjs-2/5.2.0_6nldjhme6l7nu463cfz5hxf52m:
+    resolution: {integrity: sha512-98iN5aguJyVSxp5U3CblRLH67J8gkfyGNbiK3c+l1QI/G4irHMPQw44aEPmjVag+YKTyQ260NcF82GTQ3bdscA==}
+    peerDependencies:
+      chart.js: ^4.1.1
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      chart.js: 4.4.3
+      react: 18.3.1
+    dev: false
+
   /react-dom/18.3.1_react@18.3.1:
     resolution: {integrity: sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==}
     peerDependencies:
@@ -3680,6 +3721,20 @@ packages:
       loose-envify: 1.4.0
       react: 18.3.1
       scheduler: 0.23.2
+    dev: false
+
+  /react-hot-toast/2.4.1_nnrd3gsncyragczmpvfhocinkq:
+    resolution: {integrity: sha512-j8z+cQbWIM5LY37pR6uZR6D4LfseplqnuAO4co4u8917hBUvXlEqyP1ZzqVLcqoyUesZZv/ImreoCeHVDpE5pQ==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      goober: 2.1.14
+      react: 18.3.1
+      react-dom: 18.3.1_react@18.3.1
+    transitivePeerDependencies:
+      - csstype
     dev: false
 
   /react-router-dom/6.23.1_nnrd3gsncyragczmpvfhocinkq:
@@ -4198,6 +4253,10 @@ packages:
       which-boxed-primitive: 1.0.2
     dev: true
 
+  /undici-types/5.26.5:
+    resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
+    dev: true
+
   /unicode-canonical-property-names-ecmascript/2.0.0:
     resolution: {integrity: sha512-yY5PpDlfVIU5+y/BSCxAJRBIS1Zc2dDG3Ujq+sR0U+JjUevW2JhocOF+soROYDSaAezOzOKuyyixhD6mBknSmQ==}
     engines: {node: '>=4'}
@@ -4276,7 +4335,7 @@ packages:
       debug: 4.3.5
       fast-glob: 3.3.2
       pretty-bytes: 6.1.1
-      vite: 5.2.13_sass@1.77.4
+      vite: 5.2.13_x56oaxsgxf3xwi7jr3m36vlmkm
       workbox-build: 7.1.1
       workbox-window: 7.1.0
     transitivePeerDependencies:
@@ -4284,7 +4343,7 @@ packages:
       - supports-color
     dev: true
 
-  /vite/5.2.13_sass@1.77.4:
+  /vite/5.2.13_x56oaxsgxf3xwi7jr3m36vlmkm:
     resolution: {integrity: sha512-SSq1noJfY9pR3I1TUENL3rQYDQCFqgD+lM6fTRAM8Nv6Lsg5hDLaXkjETVeBt+7vZBCMoibD+6IWnT2mJ+Zb/A==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -4312,6 +4371,7 @@ packages:
       terser:
         optional: true
     dependencies:
+      '@types/node': 20.14.2
       esbuild: 0.20.2
       postcss: 8.4.38
       rollup: 4.18.0

@@ -6,6 +6,7 @@ import { useAuthStore } from '../stores/useAuthStore';
 import styles from '../scss/LoginPage.module.scss';
 import LoadingSpinner from '../components/LoadingSpinner';
 import LogoImage from '../assets/Home/Logo_eddy.png';
+import { toast } from 'react-hot-toast';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ const LoginPage: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+
   const handleLogin = () => {
     if (!username || !password) {
       setError('Please fill in all fields');
@@ -23,13 +25,19 @@ const LoginPage: React.FC = () => {
     login(
       { username, password },
       {
-        onSuccess: () => {
-          setIsAuthenticated();
+        onSuccess: (data) => {
+          setIsAuthenticated(data.token); // Almacena el token en el estado
+          toast.success('Login successful');
           navigate('/dashboard');
+        },
+        onError: () => {
+          setError('Invalid username or password');
+          toast.error('Login failed');
         },
       }
     );
   };
+
 
   return (
     <div className={styles.container}>

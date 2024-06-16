@@ -1,0 +1,99 @@
+@import './variables.scss';
+
+.sidebar {
+  width: 250px;
+  background-color: $secondary-color;
+  color: $background-color;
+  transition: width 0.3s;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  top: 60px; // Adjusted to be below the header
+  left: 0;
+  z-index: 999;
+
+  &.collapsed {
+    width: 80px;
+
+    .menuText {
+      display: none;
+    }
+    .menu {
+      li {
+        justify-content: center;
+      }
+    }
+  }
+
+  // .toggleButton {
+
+  //   font-size: 24px;
+  //   cursor: pointer;
+  //   margin: 10px 0;
+  //   color: $background-color;
+
+  //   .collapseIcon {
+  //     fill: $background-color;
+
+  //     &:hover {
+  //       fill: $accent-color;
+  //     }
+  //   }
+  // }
+  // .toggleButton has text and icon add margin top
+  .toggleButton {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    font-size: 24px;
+    cursor: pointer;
+    // margin: 10px 0;
+    padding-top: 2rem;
+    color: $background-color;
+    width: 100%;
+    // add animation when text is hidden and shown
+    transition: all 0.3s;
+
+
+    .collapseIcon {
+      fill: $background-color;
+
+      &:hover {
+        fill: $accent-color;
+      }
+    }
+  }
+
+  .menu {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+
+    li {
+      width: 100%;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      overflow: hidden;
+      box-sizing: border-box;
+
+      &:hover {
+        background-color: $accent-color;
+      }
+
+      svg {
+        width: 24px;
+        height: 24px;
+        fill: $background-color;
+
+        &:hover {
+          fill: $accent-color;
+        }
+      }
+    }
+  }
+}
