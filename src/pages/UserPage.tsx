@@ -15,7 +15,7 @@ const UserPage: React.FC = () => {
 
   return (
     <div>
-      <h1>Users</h1>
+      <h1>Usuarios del Dashboard</h1>
       {data && <UserTable data={data} />}
     </div>
   );

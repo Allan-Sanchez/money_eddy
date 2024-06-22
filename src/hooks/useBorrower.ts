@@ -1,5 +1,6 @@
 import { useMutation, useQuery, QueryKey, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
+import { BorrowersResponse } from '../types/Borrowers';
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -14,7 +15,7 @@ interface Borrower {
   zipCode: string;
 }
 
-const fetchBorrowers = async (): Promise<Borrower[]> => {
+const fetchBorrowers = async (): Promise<BorrowersResponse[]> => {
   const { data } = await axios.get(`${backendUrl}/api/borrowers`);
   return data;
 };

@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Sidebar: React.FC = () => {
   const navigate = useNavigate();
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
   const setIsAuthenticated = useAuthStore((state) => state.logout);
 
   const toggleSidebar = () => {
@@ -31,7 +31,7 @@ const Sidebar: React.FC = () => {
       <ul className={styles.menu}>
       <li onClick={() =>handlerRedirect("/dashboard")}><Icon name="home" className={styles.icon} /><span className={styles.menuText}>Home</span></li>
       <li onClick={() =>handlerRedirect("/usuarios")}><Icon name="profile" className={styles.icon} /><span className={styles.menuText}>Usuarios</span></li>
-      <li onClick={() =>handlerRedirect("/prestamos")}><Icon name="loan" className={styles.icon} /><span className={styles.menuText}>Prestamos</span></li>
+      <li onClick={() =>handlerRedirect("/prestamos")}><Icon name="loan" className={styles.icon} /><span className={styles.menuText}>Créditos</span></li>
         <li onClick={() =>handlerRedirect("/prestatarios")}><Icon name="borrower" className={styles.icon} /><span className={styles.menuText}>Prestatarios</span></li>
         <li onClick={() =>handlerRedirect("/Pagos")}><Icon name="money" className={styles.icon} /><span className={styles.menuText}>Pagos</span></li>
         <li onClick={() =>handleLogout()}><Icon name="logout" className={styles.icon} /><span className={styles.menuText}>Logout</span></li>

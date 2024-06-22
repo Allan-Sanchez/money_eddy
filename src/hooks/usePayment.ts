@@ -1,5 +1,7 @@
 import { useMutation, useQuery, QueryKey, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
+import { PaymentsResponse } from '../types/Payments';
+
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -11,7 +13,7 @@ interface Payment {
   status: 'pending' | 'completed' | 'failed';
 }
 
-const fetchPayments = async (): Promise<Payment[]> => {
+const fetchPayments = async (): Promise<PaymentsResponse[]> => {
   const { data } = await axios.get(`${backendUrl}/api/payments`);
   return data;
 };

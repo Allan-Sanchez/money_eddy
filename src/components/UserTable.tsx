@@ -25,7 +25,7 @@ const UserTable: React.FC<UserTableProps> = ({ data }) => {
       },
       {
         accessorKey: 'username',
-        header: 'Username',
+        header: 'Nombre de usuario',
       },
       {
         accessorKey: 'email',
@@ -33,20 +33,20 @@ const UserTable: React.FC<UserTableProps> = ({ data }) => {
       },
       {
         accessorKey: 'name',
-        header: 'Name',
+        header: 'Nombre completo',
       },
       {
         accessorKey: 'phoneNumber',
-        header: 'Phone Number',
+        header: 'Teléfono',
       },
-      {
-        accessorKey: 'createdAt',
-        header: 'Created At',
-        cell: (info) => new Date(info.getValue() as string).toLocaleDateString(),
-      },
+      // {
+      //   accessorKey: 'createdAt',
+      //   header: 'Created At',
+      //   cell: (info) => new Date(info.getValue() as string).toLocaleDateString(),
+      // },
       {
         accessorKey: 'updatedAt',
-        header: 'Updated At',
+        header: 'Actualizado en',
         cell: (info) => new Date(info.getValue() as string).toLocaleDateString(),
       },
     ],

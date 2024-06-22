@@ -14,7 +14,7 @@
   }
 
   .sidebar.collapsed + .content {
-    margin-left: 80px; // width of the collapsed sidebar
+    margin-left: 80px !important; // width of the collapsed sidebar
   }
 
   @media (max-width: 768px) {

@@ -1,5 +1,6 @@
 import { useMutation, useQuery, QueryKey, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
+import {LoansResponse} from '../types/Loans';
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -14,7 +15,7 @@ interface Loan {
   status: 'active' | 'completed' | 'defaulted';
 }
 
-const fetchLoans = async (): Promise<Loan[]> => {
+const fetchLoans = async (): Promise<LoansResponse[]> => {
   const { data } = await axios.get(`${backendUrl}/api/loans`);
   return data;
 };
