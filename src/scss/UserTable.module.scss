@@ -90,4 +90,56 @@
       border-radius: 4px;
     }
   }
+
+  @media (max-width: 768px) {
+    .tableControls {
+      flex-direction: column;
+      align-items: stretch;
+
+      input {
+        min-width: 100%;
+        margin-bottom: 0.5rem;
+      }
+
+      button {
+        width: 100%;
+        margin-bottom: 0.5rem;
+      }
+
+      select {
+        width: 100%;
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    .table {
+      display: block;
+      overflow-x: auto;
+
+      th,
+      td {
+        white-space: nowrap;
+      }
+    }
+
+    .pagination {
+      flex-direction: column;
+      align-items: stretch;
+
+      .buttonContainer {
+        justify-content: center;
+        margin-bottom: 0.5rem;
+      }
+
+      button {
+        width: 100%;
+        margin-bottom: 0.5rem;
+      }
+
+      input {
+        width: 100%;
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
 }
