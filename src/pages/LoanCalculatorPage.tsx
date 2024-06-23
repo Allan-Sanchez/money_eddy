@@ -3,7 +3,8 @@ import GenericTable from '../components/GenericTable';
 import { ColumnDef } from '@tanstack/react-table';
 import styles from '../scss/LoanCalculatorPage.module.scss';
 import { formatDecimal, formatWithCommas } from '../utils/calc';
-
+import { useForm } from "react-hook-form"
+import { toast } from 'react-hot-toast';
 interface LoanData {
     paymentNumber: number;
     monthlyPayment: number;
@@ -11,16 +12,22 @@ interface LoanData {
     principalPayment: number;
     remainingPrincipal: number;
   }
+
+interface LoanForm {
+    amount: string;
+    interestRate: string;
+    duration: string;
+}
   
   const LoanCalculatorPage: React.FC = () => {
-    const [amount, setAmount] = useState<number>(0);
-    const [interestRate, setInterestRate] = useState<number>(0);
-    const [duration, setDuration] = useState<number>(0);
     const [loanData, setLoanData] = useState<LoanData[]>([]);
     const [monthlyPayment, setMonthlyPayment] = useState<number>(0);
     const [totalPayment, setTotalPayment] = useState<number>(0);
+    const [showTable, setShowTable] = useState<boolean>(false);
+    // Form 
+    const {handleSubmit,register,formState:{errors}} = useForm<LoanForm>()
   
-    const calculateLoan = () => {
+    const calculateLoan = (amount:number,interestRate:number,duration:number) => {
       const monthlyInterestRate = interestRate / 12 / 100;
       const numberOfPayments = duration;
       const monthlyPayment = (amount * monthlyInterestRate) / (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments));
@@ -75,47 +82,100 @@ interface LoanData {
           cell: info => formatWithCommas(+formatDecimal(info.getValue<number>())) 
         },
       ];
+
+    const onSubmit =async (data: LoanForm) => {
+      const { amount, interestRate, duration } = data;
+
+      calculateLoan(+amount, +interestRate, +duration);
+      toast.success('Calculo exitoso');
+      setShowTable(true);
+    }
+
   return (
     <div className={styles.loanCalculatorPage}>
       <h1>Calcular Préstamo</h1>
-      <div className={styles.form}>
-        <div className={styles.formGroup}>
-          <label htmlFor="amount">Cantidad de dinero a prestar:</label>
-          <input
-            type="number"
-            id="amount"
-            value={amount}
-            onChange={(e) => setAmount(Number(e.target.value))}
-          />
+      <div className={styles.containerForm}>
+
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+          <div className={styles.formGroup}>
+            <label htmlFor="amount">Cantidad de dinero a prestar:</label>
+            <input
+              type="text"
+              id="amount"
+              placeholder='Q 0.00'
+              {...register("amount", {
+                required: "Este campo es requerido",
+                valueAsNumber: true,
+                min: { value: 1, message: "El monto debe ser mayor a 0" },
+                // regex only numbers
+                pattern: {
+                  value: /^\d+(\.\d{1,2})?$/,
+                  message: "El monto debe ser un número"
+                } as any
+              }
+
+              )}
+            />
+            {errors.amount && <span className={styles.inputError}>{errors.amount.message}</span>}
+          </div>
+          <div className={styles.formGroup}>
+            <label htmlFor="interestRate">Interés (Por año) </label>
+            <input
+              type="text"
+              id="interestRate"
+              placeholder='0.00%'
+              {...register("interestRate", {
+                required: "Este campo es requerido",
+                valueAsNumber: true,
+                pattern: {
+                  value: /^\d+(\.\d{1,2})?$/,
+                  message: "El interés debe ser un número"
+                } as any
+              })}
+            />
+            {errors.interestRate && <span className={styles.inputError}>{errors.interestRate.message}</span>}
+
+          </div>
+          <div className={styles.formGroup}>
+            <label htmlFor="duration">Duración (Meses):</label>
+            <input
+              type="text"
+              id="duration"
+              placeholder='0'
+              {...register("duration", {
+                required: "Este campo es requerido",
+                valueAsNumber: true,
+                min: { value: 1, message: "La duración debe ser mayor a 0" },
+                // regex only numbers 0-9 no decimals
+                pattern: {
+                  value: /^\d+$/,
+                  message: "La duración debe ser un número"
+                } as any
+              })}
+            />
+            {errors.duration && <span className={styles.inputError}>{errors.duration.message}</span>}
+
+          </div>
+          <button type='submit'>Calculate</button>
+        </form>
+        <div className={styles.results}>
+          <h2>Resumen del préstamo</h2>
+          <p>Cuota Mensual: Q {formatWithCommas(+formatDecimal(monthlyPayment))}</p>
+          <p>Total a pagar: Q {formatWithCommas(+formatDecimal(totalPayment))}</p>
         </div>
-        <div className={styles.formGroup}>
-          <label htmlFor="interestRate">Interés (Por año) </label>
-          <input
-            type="number"
-            id="interestRate"
-            value={interestRate}
-            onChange={(e) => setInterestRate(Number(e.target.value))}
-          />
-        </div>
-        <div className={styles.formGroup}>
-          <label htmlFor="duration">Duración (Meses):</label>
-          <input
-            type="number"
-            id="duration"
-            value={duration}
-            onChange={(e) => setDuration(Number(e.target.value))}
-          />
-        </div>
-        <button onClick={calculateLoan}>Calculate</button>
       </div>
-      <div className={styles.results}>
-        <h2>Resumen del préstamo</h2>
-        <p>Cuota Mensual: Q {formatWithCommas(+formatDecimal(monthlyPayment))}</p>
-        <p>Total a pagar: Q {formatWithCommas(+formatDecimal(totalPayment)) }</p>
-      </div>
-      <div className={styles.table}>
-        <GenericTable data={loanData} columns={columns} fileName="Loan_Calculation" />
-      </div>
+      {
+        showTable ? (
+          <div className={styles.table}>
+            <GenericTable data={loanData} columns={columns} fileName="Loan_Calculation" />
+          </div>
+        ) : (
+          <div className={styles.noTableMessage}>
+            <h2>Tabla de Amortización</h2>
+            <p>Por favor llene el formulario para ver la tabla de amortización</p>
+          </div>
+        )
+      }
     </div>
   );
 };

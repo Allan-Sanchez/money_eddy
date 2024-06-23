@@ -2,10 +2,6 @@ import React from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
 import Card from '../components/Card';
-// import HomeIcon from '../assets/icons/HomeIcon';
-// import ProfileIcon from '../assets/icons/ProfileIcon';
-// import SettingsIcon from '../assets/icons/SettingsIcon';
-// import LogoutIcon from '../assets/icons/LogoutIcon';
 import styles from '../scss/Dashboard.module.scss';
 
 import Borrow from "../assets/Home/borrow _user.png"
@@ -32,6 +28,7 @@ const Dashboard: React.FC = () => {
     ],
   };
 
+
   
 
   return (
@@ -41,7 +38,7 @@ const Dashboard: React.FC = () => {
         <Card title="Total Préstamos" value="$150,000" icon={<img src={Money} alt="Borrow image" />} />
         <Card title="Intereses Ganados" value="$50,000" icon={<img src={Wallet} alt="Borrow image" />} />
         {/* <Card title="Deudores Activos" value={120} icon={<img src={Tasks} alt="Borrow image" />} /> */}
-        <Card title="Calculadora" value={120} icon={<img src={Calc} alt="Borrow image" />} />
+        <Card title="Calculadora" redirect="calculadora" icon={<img src={Calc} alt="Borrow image" /> } />
       </div>
       <div className={styles.chartContainer}>
         <div>
