@@ -24,6 +24,7 @@ interface LoanForm {
     const [monthlyPayment, setMonthlyPayment] = useState<number>(0);
     const [totalPayment, setTotalPayment] = useState<number>(0);
     const [showTable, setShowTable] = useState<boolean>(false);
+    const [isDurationInYears, setIsDurationInYears] = useState(false);
     // Form 
     const {handleSubmit,register,formState:{errors}} = useForm<LoanForm>()
   
@@ -60,31 +61,44 @@ interface LoanForm {
     };
   
     const columns: ColumnDef<LoanData>[] = [
-        { header: 'Numero de cuota', accessorKey: 'paymentNumber' },
+        { header: 'Numero de cuota', accessorKey: 'paymentNumber',size: 30},
         { 
           header: 'Monto de la cuota', 
           accessorKey: 'monthlyPayment', 
+          enableResizing:false, size: 150,
+          maxSize: 150,
+          minSize: 150,
           cell: info => formatWithCommas(+formatDecimal(info.getValue<number>())) 
         },
         { 
           header: 'Pago de Interés', 
           accessorKey: 'interestPayment', 
+          enableResizing:false, size: 150,
           cell: info => formatWithCommas(+formatDecimal(info.getValue<number>())) 
         },
         { 
           header: 'Capital', 
           accessorKey: 'principalPayment', 
+          enableResizing:false, size: 150,
           cell: info => formatWithCommas(+formatDecimal(info.getValue<number>())) 
         },
         { 
           header: 'Saldo', 
           accessorKey: 'remainingPrincipal', 
+          enableResizing:false, size: 150,
           cell: info => formatWithCommas(+formatDecimal(info.getValue<number>())) 
         },
       ];
 
     const onSubmit =async (data: LoanForm) => {
-      const { amount, interestRate, duration } = data;
+      const { amount, interestRate } = data;
+      let { duration } = data;
+
+      if(isDurationInYears){
+        const years = +duration;
+        const months = years * 12;
+        duration = months.toString();
+      }
 
       calculateLoan(+amount, +interestRate, +duration);
       toast.success('Calculo exitoso');
@@ -136,7 +150,7 @@ interface LoanForm {
             {errors.interestRate && <span className={styles.inputError}>{errors.interestRate.message}</span>}
 
           </div>
-          <div className={styles.formGroup}>
+          {/* <div className={styles.formGroup}>
             <label htmlFor="duration">Duración (Meses):</label>
             <input
               type="text"
@@ -155,6 +169,39 @@ interface LoanForm {
             />
             {errors.duration && <span className={styles.inputError}>{errors.duration.message}</span>}
 
+          </div> */}
+          <div className={styles.formGroup}>
+            <div className={styles.durationContainer}>
+
+            <label>Duración:</label>
+            <div className={styles.switchContainer}>
+              <span>Meses</span>
+              <label className={styles.switch}>
+                <input
+                  type="checkbox"
+                  checked={isDurationInYears}
+                  onChange={() => setIsDurationInYears(prev => !prev)}
+                />
+                <span className={styles.slider}></span>
+              </label>
+              <span>Años</span>
+            </div>
+            </div>
+            <input
+              type="text"
+              id="duration"
+              placeholder='0'
+              {...register("duration", {
+                required: "Este campo es requerido",
+                valueAsNumber: true,
+                min: { value: 1, message: `La duración debe ser mayor a 0 ${isDurationInYears ? 'años' : 'meses'}` },
+                pattern: {
+                  value: /^\d+$/,
+                  message: "La duración debe ser un número"
+                } as any
+              })}
+            />
+            {errors.duration && <span className={styles.inputError}>{errors.duration.message}</span>}
           </div>
           <button type='submit'>Calculate</button>
         </form>

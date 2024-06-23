@@ -15,6 +15,7 @@ interface GenericTableProps<T> {
   data: T[];
   columns: ColumnDef<T>[];
   fileName: string;
+  width?: string;
 }
 
 const GenericTable = <T,>({ data, columns, fileName }: GenericTableProps<T>) => {
@@ -61,7 +62,7 @@ const GenericTable = <T,>({ data, columns, fileName }: GenericTableProps<T>) => 
         {table.getHeaderGroups().map((headerGroup) => (
           <tr key={headerGroup.id}>
             {headerGroup.headers.map((header) => (
-              <th key={header.id} onClick={header.column.getToggleSortingHandler()}>
+              <th key={header.id} onClick={header.column.getToggleSortingHandler()} style={{width:header.getSize()}}>
                 {flexRender(header.column.columnDef.header, header.getContext())}
                 <span>
                   {header.column.getCanSort()
@@ -81,7 +82,7 @@ const GenericTable = <T,>({ data, columns, fileName }: GenericTableProps<T>) => 
         {table.getRowModel().rows.map((row) => (
           <tr key={row.id}>
             {row.getVisibleCells().map((cell) => (
-              <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
+              <td key={cell.id} style={{width:cell.column.getSize()}}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
             ))}
           </tr>
         ))}
