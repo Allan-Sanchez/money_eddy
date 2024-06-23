@@ -12,6 +12,7 @@ const LoginPage: React.FC = () => {
   const navigate = useNavigate();
   const { mutate: login, isPending, isError } = useLogin();
   const setIsAuthenticated = useAuthStore((state) => state.login);
+  const changeUserName = useAuthStore((state) => state.changeUserName);
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -27,6 +28,7 @@ const LoginPage: React.FC = () => {
       {
         onSuccess: (data) => {
           setIsAuthenticated(data.token); // Almacena el token en el estado
+          changeUserName(data.user || "");
           toast.success('Login successful');
           navigate('/dashboard');
         },

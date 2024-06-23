@@ -5,6 +5,8 @@ interface AuthState {
   token: string | null;
   login: (token: string) => void;
   logout: () => void;
+  userName?: string;
+  changeUserName: (userName: string) => void;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
@@ -17,5 +19,8 @@ export const useAuthStore = create<AuthState>((set) => ({
   logout: () => {
     localStorage.removeItem('token');
     set({ isAuthenticated: false, token: null });
+  },
+  changeUserName: (userName: string) => {
+    set({ userName });
   },
 }));

@@ -11,6 +11,7 @@ import ProtectedRoute from './routers/ProtectedRoute';
 import LoanPage from './pages/LoanPage';
 import PaymentsPage from './pages/PaymentsPage';
 import BorrowerPage from './pages/BorrowerPage';
+import LoanCalculatorPage from './pages/LoanCalculatorPage';
 
 const App: React.FC = () => {
   return (
@@ -25,6 +26,7 @@ const App: React.FC = () => {
             <Route path="/prestatarios" element={<ProtectedRoute element={<BorrowerPage />} />} />     
             <Route path="/prestamos" element={<ProtectedRoute element={<LoanPage />} />} />        
             <Route path="/pagos" element={<ProtectedRoute element={<PaymentsPage />} />} />        
+            <Route path="/calculadora" element={<ProtectedRoute element={<LoanCalculatorPage />} />} />        
         </Routes>
       </Router>
       <ReactQueryDevtools initialIsOpen={false} />

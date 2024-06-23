@@ -11,7 +11,8 @@ import styles from '../scss/Dashboard.module.scss';
 import Borrow from "../assets/Home/borrow _user.png"
 import Money from "../assets/Home/money-bag.png"
 import Wallet from "../assets/Home/wallet.png"
-import Tasks from "../assets/Home/tasks.png"
+// import Tasks from "../assets/Home/tasks.png"
+import Calc from "../assets/Home/calculator.png"
 
 
 Chart.register(...registerables);
@@ -39,7 +40,8 @@ const Dashboard: React.FC = () => {
         <Card title="Total Deudores" value={350} icon={<img src={Borrow} alt="Borrow image" />} />
         <Card title="Total Préstamos" value="$150,000" icon={<img src={Money} alt="Borrow image" />} />
         <Card title="Intereses Ganados" value="$50,000" icon={<img src={Wallet} alt="Borrow image" />} />
-        <Card title="Deudores Activos" value={120} icon={<img src={Tasks} alt="Borrow image" />} />
+        {/* <Card title="Deudores Activos" value={120} icon={<img src={Tasks} alt="Borrow image" />} /> */}
+        <Card title="Calculadora" value={120} icon={<img src={Calc} alt="Borrow image" />} />
       </div>
       <div className={styles.chartContainer}>
         <div>

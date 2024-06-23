@@ -2,9 +2,11 @@ import React from 'react';
 import styles from '../scss/Header.module.scss';
 import LogoImage from '../assets/Home/Logo_eddy.png';
 import Icon from './Icon';
+import { useAuthStore } from '../stores/useAuthStore';
+
 
 const Header: React.FC = () => {
-  const userName = "John Doe"; // Este valor puede ser dinámico, basado en el usuario autenticado
+  const userName = useAuthStore(state => state.userName);
 
   return (
     <header className={styles.header}>

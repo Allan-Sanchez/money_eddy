@@ -30,6 +30,7 @@ const Sidebar: React.FC = () => {
       </div>
       <ul className={styles.menu}>
       <li onClick={() =>handlerRedirect("/dashboard")}><Icon name="home" className={styles.icon} /><span className={styles.menuText}>Home</span></li>
+      <li onClick={() =>handlerRedirect("/calculadora")}><Icon name="calc" className={styles.icon} /><span className={styles.menuText}>Calculadora</span></li>
       <li onClick={() =>handlerRedirect("/usuarios")}><Icon name="profile" className={styles.icon} /><span className={styles.menuText}>Usuarios</span></li>
       <li onClick={() =>handlerRedirect("/prestamos")}><Icon name="loan" className={styles.icon} /><span className={styles.menuText}>Créditos</span></li>
         <li onClick={() =>handlerRedirect("/prestatarios")}><Icon name="borrower" className={styles.icon} /><span className={styles.menuText}>Prestatarios</span></li>
