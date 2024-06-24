@@ -5,6 +5,7 @@ import { usePayments } from '../hooks/usePayment';
 import { PaymentsResponse } from '../types/Payments';
 import { useModalStore } from '../stores/useModalStore';
 import CreatePayment from '../components/Payments/PaymentCreate';
+import { formatDecimal, formatWithCommas } from '../utils/calc';
 
 const LoanPage: React.FC = () => {
   const { data, error, isLoading } = usePayments();
@@ -22,21 +23,26 @@ const LoanPage: React.FC = () => {
         accessorKey: 'amount',
         header: 'Monto',
         enableSorting: true,
+        cell: info => formatWithCommas(+formatDecimal(info.getValue<number>())) 
       },
       {
         accessorKey: 'paymentDate',
         header: 'Fecha Pago',
         enableSorting: true,
+        cell: (info) => new Date(info.getValue() as string).toLocaleDateString(),
+
       },
       {
         accessorKey: 'interest',
         header: 'Interés',
         enableSorting: true,
+        cell: info => formatWithCommas(+formatDecimal(info.getValue<number>())) 
       },
       {
         accessorKey: 'principal',
         header: 'Capital',
         enableSorting: true,
+        cell: info => formatWithCommas(+formatDecimal(info.getValue<number>())) 
       },
 
       {

@@ -5,6 +5,7 @@ import { useLoans } from '../hooks/useLoan';
 import { LoansResponse } from '../types/Loans';
 import CreateLoan from '../components/Loan/LoanCreate';
 import { useModalStore } from '../stores/useModalStore';
+import { formatDecimal, formatWithCommas } from '../utils/calc';
 
 const LoanPage: React.FC = () => {
   const { data, error, isLoading } = useLoans();
@@ -21,11 +22,13 @@ const LoanPage: React.FC = () => {
         accessorKey: 'amount',
         header: 'Monto',
         enableSorting: true,
+        cell: info => formatWithCommas(+formatDecimal(info.getValue<number>())) 
       },
       {
         accessorKey: 'interestRate',
         header: '% Interés',
         enableSorting: true,
+        cell: info => formatWithCommas(+formatDecimal(info.getValue<number>())) 
       },
       {
         accessorKey: 'duration',
