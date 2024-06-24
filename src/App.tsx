@@ -23,7 +23,7 @@ const App: React.FC = () => {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
             <Route path="/usuarios" element={<ProtectedRoute element={<UserPage />} />} />     
-            <Route path="/prestatarios" element={<ProtectedRoute element={<BorrowerPage />} />} />     
+            <Route path="/deudores" element={<ProtectedRoute element={<BorrowerPage />} />} />     
             <Route path="/prestamos" element={<ProtectedRoute element={<LoanPage />} />} />        
             <Route path="/pagos" element={<ProtectedRoute element={<PaymentsPage />} />} />        
             <Route path="/calculadora" element={<ProtectedRoute element={<LoanCalculatorPage />} />} />        

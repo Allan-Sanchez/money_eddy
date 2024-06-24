@@ -3,9 +3,13 @@ import GenericTable from '../components/GenericTable';
 import { ColumnDef } from '@tanstack/react-table';
 import { usePayments } from '../hooks/usePayment';
 import { PaymentsResponse } from '../types/Payments';
+import { useModalStore } from '../stores/useModalStore';
+import CreatePayment from '../components/Payments/PaymentCreate';
 
 const LoanPage: React.FC = () => {
   const { data, error, isLoading } = usePayments();
+  const openModal = useModalStore((state) => state.openModal);
+
 
   const columns = useMemo<ColumnDef<PaymentsResponse>[]>( 
     () => [
@@ -31,13 +35,13 @@ const LoanPage: React.FC = () => {
       },
       {
         accessorKey: 'principal',
-        header: 'Principal',
+        header: 'Capital',
         enableSorting: true,
       },
 
       {
         accessorKey: 'status',
-        header: 'Status',
+        header: 'Estado de Pago',
         enableSorting: true,
       },
     ],
@@ -54,7 +58,13 @@ const LoanPage: React.FC = () => {
 
   return (
     <div>
+      <div className='mainHeader'>
       <h1>Pagos</h1>
+
+        <button className='buttonHeader' onClick={() => openModal(<CreatePayment/>)}>
+          Agregar Pago
+        </button>
+      </div>
       {data && <GenericTable data={data} columns={columns} fileName="Payments" />}
     </div>
   );

@@ -1,6 +1,7 @@
 import { useMutation, useQuery, QueryKey, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
-import {LoansResponse} from '../types/Loans';
+import {LoanCreate, LoansResponse} from '../types/Loans';
+import { toast } from 'react-hot-toast';
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -25,7 +26,7 @@ const fetchLoanById = async (id: string): Promise<Loan> => {
   return data;
 };
 
-const createLoan = async (loan: Omit<Loan, 'id'>): Promise<Loan> => {
+const createLoan = async (loan: Omit<LoanCreate, 'id'>): Promise<Loan> => {
   const { data } = await axios.post(`${backendUrl}/api/loans`, loan);
   return data;
 };
@@ -61,7 +62,12 @@ export const useCreateLoan = () => {
     mutationFn: createLoan,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['loans'] });
+      queryClient.invalidateQueries({ queryKey: ['loan'] });
+      toast.success('préstamo creado exitosamente');
     },
+    onError: (error) => {
+      toast.error(error.message);
+    }
   });
 };
 
@@ -72,7 +78,11 @@ export const useUpdateLoan = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['loans'] });
       queryClient.invalidateQueries({ queryKey: ['loan'] });
+      toast.success('Préstamo actualizado exitosamente');
     },
+    onError: (error) => {
+      toast.error(error.message);
+    }
   });
 };
 
@@ -83,5 +93,8 @@ export const useDeleteLoan = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['loans'] });
     },
+    onError: (error) => {
+      toast.error(error.message);
+    }
   });
 };

@@ -1,5 +1,6 @@
 // src/styles.scss
 @import 'inputs.scss';
+@import './variables.scss';
 
 body {
     margin: 0;
@@ -12,3 +13,22 @@ body {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
   }
   
+
+  .mainHeader{
+    display: flex;
+    margin: 2rem 0;
+    box-sizing: border-box;
+    justify-content: space-between;
+
+    h1 {
+      font-size: 2rem;
+      margin: 0;
+    }
+    .buttonHeader{
+     max-width: 200px;
+     background-color: $secondary-color;
+    }
+    .buttonHeader:hover{
+      background-color: $accent-color;
+    }
+  }

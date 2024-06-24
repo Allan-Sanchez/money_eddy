@@ -16,3 +16,13 @@ export interface Borrower {
     name:  string;
     email: string;
 }
+
+export interface LoanCreate {
+    amount:       number;
+    interestRate: number;
+    duration:     number;
+    startDate:    Date;
+    endDate:      Date;
+    status?:       string;
+    borrowerId:   number;
+}

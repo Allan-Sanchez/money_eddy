@@ -17,3 +17,13 @@ export interface Loan {
     interestRate: number;
     duration:     number;
 }
+
+export interface PaymentCreate {
+    amount:      number;
+    paymentDate: Date;
+    status?:     string;
+    interest?:    number;
+    principal?:   number;
+    penalty?:     number;
+    loanId:      number;
+}

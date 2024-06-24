@@ -3,9 +3,12 @@ import GenericTable from '../components/GenericTable';
 import { ColumnDef } from '@tanstack/react-table';
 import { useLoans } from '../hooks/useLoan';
 import { LoansResponse } from '../types/Loans';
+import CreateLoan from '../components/Loan/LoanCreate';
+import { useModalStore } from '../stores/useModalStore';
 
 const LoanPage: React.FC = () => {
   const { data, error, isLoading } = useLoans();
+  const openModal = useModalStore((state) => state.openModal);
 
   const columns = useMemo<ColumnDef<LoansResponse>[]>( 
     () => [
@@ -85,9 +88,17 @@ const LoanPage: React.FC = () => {
     return <div>Error: {error.message}</div>;
   }
 
+
+
   return (
     <div>
+      <div className='mainHeader'>
       <h1>Créditos</h1>
+
+        <button className='buttonHeader' onClick={() => openModal(<CreateLoan/>)}>
+          Agregar Crédito
+        </button>
+      </div>
       {data && <GenericTable data={data} columns={columns} fileName="Loans" />}
     </div>
   );

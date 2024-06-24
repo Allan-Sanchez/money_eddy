@@ -1,6 +1,7 @@
 import { useMutation, useQuery, QueryKey, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
-import { BorrowersResponse } from '../types/Borrowers';
+import { BorrowerCreate, BorrowersResponse } from '../types/Borrowers';
+import { toast } from 'react-hot-toast';
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -25,7 +26,7 @@ const fetchBorrowerById = async (id: string): Promise<Borrower> => {
   return data;
 };
 
-const createBorrower = async (borrower: Omit<Borrower, 'id'>): Promise<Borrower> => {
+const createBorrower = async (borrower: Omit<BorrowerCreate, 'id'>): Promise<Borrower> => {
   const { data } = await axios.post(`${backendUrl}/api/borrowers`, borrower);
   return data;
 };
@@ -62,7 +63,11 @@ export const useCreateBorrower = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['borrowers'] });
       queryClient.invalidateQueries({ queryKey: ['borrower'] });
+      toast.success('Deudor creado exitosamente');
     },
+    onError: (error) => {
+      toast.error(error.message);
+    }
   });
 };
 
@@ -72,7 +77,11 @@ export const useUpdateBorrower = () => {
     mutationFn: updateBorrower,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['borrowers'] });
+      toast.success('Deudor actualizado exitosamente');
     },
+    onError: (error) => {
+      toast.error(error.message);
+    }
   });
 };
 
@@ -82,6 +91,10 @@ export const useDeleteBorrower = () => {
     mutationFn: deleteBorrower,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['borrowers'] });
+      toast.success('Deudor eliminado exitosamente');
     },
+    onError: (error) => {
+      toast.error(error.message);
+    }
   });
 };

@@ -1,6 +1,7 @@
 import { useMutation, useQuery, QueryKey, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
-import { PaymentsResponse } from '../types/Payments';
+import { PaymentCreate, PaymentsResponse } from '../types/Payments';
+import { toast } from 'react-hot-toast';
 
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
@@ -23,7 +24,7 @@ const fetchPaymentById = async (id: string): Promise<Payment> => {
   return data;
 };
 
-const createPayment = async (payment: Omit<Payment, 'id'>): Promise<Payment> => {
+const createPayment = async (payment: Omit<PaymentCreate, 'id'>): Promise<Payment> => {
   const { data } = await axios.post(`${backendUrl}/api/payments`, payment);
   return data;
 };
@@ -59,7 +60,11 @@ export const useCreatePayment = () => {
     mutationFn: createPayment,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['payments'] });
+      toast.success('Pago creado correctamente');
     },
+    onError: (error) => {
+      toast.error(error.message);
+    }
   });
 };
 
@@ -70,7 +75,11 @@ export const useUpdatePayment = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['payments'] });
       queryClient.invalidateQueries({ queryKey: ['payment'] });
+      toast.success('Pago actualizado correctamente');
     },
+    onError: (error) => {
+      toast.error(error.message);
+    }
   });
 };
 
@@ -80,6 +89,10 @@ export const useDeletePayment = () => {
     mutationFn: deletePayment,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['payments'] });
+      toast.success('Pago eliminado correctamente');
     },
+    onError: (error) => {
+      toast.error(error.message);
+    }
   });
 };

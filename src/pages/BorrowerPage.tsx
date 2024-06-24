@@ -3,9 +3,13 @@ import GenericTable from '../components/GenericTable';
 import { useBorrowers } from '../hooks/useBorrower';
 import { BorrowersResponse } from '../types/Borrowers';
 import { ColumnDef } from '@tanstack/react-table';
+// modal
+import {useModalStore} from '../stores/useModalStore';
+import CreateBorrower from '../components/Borrower/Create';
 
 const BorrowerPage: React.FC = () => {
   const { data, error, isLoading } = useBorrowers();
+  const openModal = useModalStore((state) => state.openModal);
 
   const columns = useMemo<ColumnDef<BorrowersResponse>[]>( 
     () => [
@@ -34,22 +38,6 @@ const BorrowerPage: React.FC = () => {
         header: 'Dirección',
         enableSorting: true,
       },
-      // {
-      //   accessorKey: 'city',
-      //   header: 'City',
-      //   enableSorting: true,
-      // },
-      // {
-      //   accessorKey: 'state',
-      //   header: 'State',
-      //   enableSorting: true,
-      // },
-      // {
-      //   accessorKey: 'createdAt',
-      //   header: 'Created At',
-      //   enableSorting: true,
-      //   cell: (info) => new Date(info.getValue() as string).toLocaleDateString(),
-      // },
       {
         accessorKey: 'updatedAt',
         header: 'Actualizado en',
@@ -70,7 +58,13 @@ const BorrowerPage: React.FC = () => {
 
   return (
     <div>
-      <h1>Deudores</h1>
+      <div className='mainHeader'>
+        <h1>Deudores</h1>
+
+        <button className='buttonHeader' onClick={() => openModal(<CreateBorrower/>)}>
+          Agregar Deudor
+        </button>
+      </div>
       {data && <GenericTable data={data} columns={columns} fileName="borrowers" />}
     </div>
   );
